@@ -2,10 +2,7 @@ package cs414.a5.nithya.common;
 
 import java.util.Calendar;
 
-
-
 public interface Ticket extends java.rmi.Remote{
-
 
 	public Calendar getTimeOfEntry() throws java.rmi.RemoteException;
 

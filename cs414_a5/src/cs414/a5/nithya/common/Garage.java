@@ -9,7 +9,7 @@ import java.util.Set;
 
 public interface Garage extends java.rmi.Remote  {
 
-	public Ticket enterGarage(String name, String phoneNum, String email, String vehicleNum) throws java.rmi.RemoteException;
+	public Ticket enterGarage(Customer cust) throws java.rmi.RemoteException;
 	
 	public Ticket validateTicketForExitingGarage(int ticketReferenceNumber, String vehicleNumber) throws java.rmi.RemoteException;
 	
