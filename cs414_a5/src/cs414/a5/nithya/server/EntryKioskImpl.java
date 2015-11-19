@@ -1,8 +1,10 @@
 package cs414.a5.nithya.server;
 
+import java.io.Serializable;
+
 import cs414.a5.nithya.common.*;
 
-public class EntryKioskImpl implements EntryKiosk {
+public class EntryKioskImpl implements  Serializable, EntryKiosk {
 	private String kioskNumber;
 	private boolean entryGate;
 	private Register register;
