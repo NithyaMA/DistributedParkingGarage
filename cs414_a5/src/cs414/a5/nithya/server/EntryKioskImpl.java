@@ -1,11 +1,13 @@
 package cs414.a5.nithya.server;
 
-public class EntryKiosk {
+import cs414.a5.nithya.common.*;
+
+public class EntryKioskImpl implements EntryKiosk {
 	private String kioskNumber;
 	private boolean entryGate;
 	private Register register;
 	
-	public EntryKiosk(String number, Register register)
+	public EntryKioskImpl(String number, Register register)
 	{
 		kioskNumber=number;
 		entryGate=false;
@@ -14,7 +16,7 @@ public class EntryKiosk {
 	}
 	public Ticket generateTicketandOpenGate(Customer customer,int assignedParkingLot)
 	{
-		Ticket ticket= new Ticket(customer, assignedParkingLot, this.register);
+		Ticket ticket= new TicketImpl(customer, assignedParkingLot, this.register);
 		
 		this.openEntryGate();
 		return ticket;
@@ -31,16 +33,7 @@ public class EntryKiosk {
 	 }
 	 
 	 
-	 public class CustomException extends RuntimeException
-		{
-			
-			private static final long serialVersionUID = 1L;
-			
-			public CustomException(String message)
-			{
-				super(message);
-			}
-		}
+	
 
 
 	public boolean isEntryGate() {

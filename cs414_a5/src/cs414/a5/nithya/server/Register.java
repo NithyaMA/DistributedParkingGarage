@@ -7,22 +7,27 @@ import java.util.Set;
 
 
 
+
+import cs414.a5.nithya.common.*;
+
+
+
 public class Register {
 
-	private Set <Ticket> tickets= new HashSet<Ticket>();
+	private Set <TicketImpl> tickets= new HashSet<TicketImpl>();
 	
-	public boolean addTicketToGeneratedTickets(Ticket ticket)
+	public boolean addTicketToGeneratedTickets(TicketImpl ticket)
 	{
 		tickets.add(ticket);
 		return true;
 	}
 	
-	public Ticket validateTicket(int ticketReferenceNumber, String vehicleNumber)
+	public TicketImpl validateTicket(int ticketReferenceNumber, String vehicleNumber) throws CustomException
 	{	
 		boolean flag=false;
-		Ticket submittedTicket=null;
+		TicketImpl submittedTicket=null;
 		
-		for(Ticket ticket: tickets)
+		for(TicketImpl ticket: tickets)
 		{
 			if(ticket.getTicketReferenceNumber()==ticketReferenceNumber)
 			{	
@@ -182,15 +187,17 @@ public class Register {
 		return tickets;
 	}
 	
-	
-	public class CustomException extends RuntimeException
+	public TicketImpl getSpecificTicket(int ticketRefNum)
 	{
-		
-		private static final long serialVersionUID = 1L;
-		
-		public CustomException(String message)
+		TicketImpl specificTicket=null;
+		for(TicketImpl t : tickets)
 		{
-			super(message);
+			if (t.getTicketReferenceNumber()==ticketRefNum)
+				specificTicket= t;
 		}
+		return specificTicket;
 	}
+	
+	
+	
 }

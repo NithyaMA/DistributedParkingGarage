@@ -9,17 +9,17 @@ import java.util.Set;
 
 public interface Garage extends java.rmi.Remote  {
 
-	public Ticket enterGarage(Customer cust) throws java.rmi.RemoteException;
+	 Ticket enterGarage(Customer cust) throws java.rmi.RemoteException;
 	
-	public Ticket validateTicketForExitingGarage(int ticketReferenceNumber, String vehicleNumber) throws java.rmi.RemoteException;
+	 Ticket validateTicketForExitingGarage(int ticketReferenceNumber, String vehicleNumber) throws java.rmi.RemoteException;
 	
-	public float payParkingFeeByCash( Ticket ticket, float amount) throws java.rmi.RemoteException;
+	 float payParkingFeeByCash( int ticketRefNum, float amount) throws java.rmi.RemoteException;
 	
-	public boolean payParkingFeeByCard(Ticket ticket, Long cardNumber, Date expiryDate) throws java.rmi.RemoteException;
+	 boolean payParkingFeeByCard(int ticketRefNum, Long cardNumber, Date expiryDate) throws java.rmi.RemoteException;
 	
-	public Set<Ticket>  generateReport(String choice, Calendar start) throws java.rmi.RemoteException;
+	Set<Ticket>  generateReport(String choice, Calendar start) throws java.rmi.RemoteException;
 	
-	public void updateStatus() throws java.rmi.RemoteException;
+	void updateStatus() throws java.rmi.RemoteException;
 	
 	public int findBusiestHourOfMonth(Calendar month) throws java.rmi.RemoteException;
 	

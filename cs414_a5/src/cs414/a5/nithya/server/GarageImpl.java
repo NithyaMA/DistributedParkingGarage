@@ -1,31 +1,42 @@
 package cs414.a5.nithya.server;
 
+import java.rmi.RemoteException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+
+import cs414.a5.nithya.common.Customer;
 import cs414.a5.nithya.common.Garage;
+import cs414.a5.nithya.common.Ticket;
+import cs414.a5.nithya.common.EntryKiosk;
+import cs414.a5.nithya.common.ExitKiosk;
 
 
 
 
 public class GarageImpl extends java.rmi.server.UnicastRemoteObject implements Garage {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3183452443490996223L;
 	private String name;
 	private GarageStatus garageStatus;
 	private int totalOccupiedSpaces;
 	private int totalUnoccupiedSpaces;
 	private Map <Integer, String>parkingLots= new HashMap<Integer, String>();
-	
 	private EntryKiosk entryKiosk;
 	private ExitKiosk exitKiosk;
 	private Register register;
 	private Admin admin;
 	
 	
-	public GarageImpl(String name, int numberOfParkingLots, EntryKiosk entryKiosk, ExitKiosk exitKiosk, Register register, Admin admin)
+	
+	
+	public GarageImpl(String name, int numberOfParkingLots, EntryKiosk entryKiosk, ExitKiosk exitKiosk, Register register, Admin admin) throws RemoteException
 	{
 		this.name=name;
 	
@@ -41,7 +52,34 @@ public class GarageImpl extends java.rmi.server.UnicastRemoteObject implements G
 		this.register=register;
 		this.admin=admin;
 	}
-	public Ticket enterGarage(Customer customer)
+	
+	
+	public GarageImpl() throws RemoteException
+	{
+		Register register= new Register();
+		EntryKiosk entryKiosk= new EntryKioskImpl("en1",register);
+		ExitKiosk exitKiosk= new ExitKioskImpl("en2", register);
+		Admin admin= new Admin("admin", "admin123", register);
+		String name= "CS414";
+		int numberOfParkingLots= 3;
+		
+		this.name=name;
+		
+		for(int i=1; i<= numberOfParkingLots; i++)
+		{
+			parkingLots.put(i, "empty");
+		}
+		this.totalOccupiedSpaces=0;
+        this.totalUnoccupiedSpaces=numberOfParkingLots;
+		this.garageStatus= GarageStatus.available;
+		this.entryKiosk=entryKiosk;
+		this.exitKiosk=exitKiosk;
+		this.register=register;
+		this.admin=admin;
+	}
+	
+	@Override
+	public Ticket enterGarage(Customer customer) throws RemoteException
 
 	{	
 		if(garageStatus.equals(GarageStatus.available))
@@ -73,15 +111,18 @@ public class GarageImpl extends java.rmi.server.UnicastRemoteObject implements G
 	
 	
 	
-	
+	@Override
 	public Ticket validateTicketForExitingGarage(int ticketReferenceNumber, String vehicleNumber)
 	{
 		return register.validateTicket(ticketReferenceNumber,  vehicleNumber);
 	
 	}
 	
-	public float payParkingFeeByCash( Ticket ticket, float amount)
+	@Override
+	public float payParkingFeeByCash( int ticketReferenceNum, float amount) throws RemoteException
 	{
+		
+		TicketImpl ticket=register.getSpecificTicket(ticketReferenceNum);
 		float fee=ticket.getTotalParkingFee();
 		Payment payment= new Payment();
 		float balanceDue=payment.makePaymentByCash(fee, amount);
@@ -94,8 +135,10 @@ public class GarageImpl extends java.rmi.server.UnicastRemoteObject implements G
 		return balanceDue;
 	}
 	
-	public boolean payParkingFeeByCard(Ticket ticket, Long cardNumber, Date expiryDate)
+	@Override
+	public boolean payParkingFeeByCard(int ticketReferenceNum, Long cardNumber, Date expiryDate) throws RemoteException
 	{
+		TicketImpl ticket=register.getSpecificTicket(ticketReferenceNum);
 		Payment payment= new Payment();
 		if(payment.makePaymentByCard(cardNumber, expiryDate))
 		{
@@ -128,7 +171,7 @@ public class GarageImpl extends java.rmi.server.UnicastRemoteObject implements G
 	{
 		return register.findBusiestHourOfTheMonth(month);
 	}
-	public void activateSensor(String choiceOfGate)
+	public void activateSensor(String choiceOfGate) throws RemoteException
 	{
 		if (choiceOfGate.equals("entry"))
 		{
