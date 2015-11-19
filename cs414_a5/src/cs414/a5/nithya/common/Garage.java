@@ -9,9 +9,9 @@ import java.util.Set;
 
 public interface Garage extends java.rmi.Remote  {
 
-	 Ticket enterGarage(Customer cust) throws java.rmi.RemoteException;
+	 Ticket enterGarage(Customer cust) throws java.rmi.RemoteException, CustomException;
 	
-	 Ticket validateTicketForExitingGarage(int ticketReferenceNumber, String vehicleNumber) throws java.rmi.RemoteException;
+	 Ticket validateTicketForExitingGarage(int ticketReferenceNumber, String vehicleNumber) throws java.rmi.RemoteException, CustomException;
 	
 	 float payParkingFeeByCash( int ticketRefNum, float amount) throws java.rmi.RemoteException;
 	
@@ -27,7 +27,7 @@ public interface Garage extends java.rmi.Remote  {
 	
 	public boolean authorizeAdmin(String userName, String password) throws java.rmi.RemoteException;
 	
-	public void stimulateTime(String testingChoice, Calendar cal, int ticketNum) throws java.rmi.RemoteException;
+	public void stimulateTime(String testingChoice, Calendar cal, int ticketNum) throws java.rmi.RemoteException, CustomException;
 	
 	public Ticket helpCustomerToReprintTicket(String vehicleNumber) throws java.rmi.RemoteException;
 	

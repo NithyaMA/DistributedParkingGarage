@@ -1,5 +1,7 @@
 package cs414.a5.nithya.server;
 
+import java.io.Serializable;
+import java.rmi.RemoteException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
@@ -8,26 +10,28 @@ import java.util.Set;
 
 
 
+
+
 import cs414.a5.nithya.common.*;
 
 
 
-public class Register {
+public class Register implements Serializable {
 
-	private Set <TicketImpl> tickets= new HashSet<TicketImpl>();
+	private Set <Ticket> tickets= new HashSet<Ticket>();
 	
-	public boolean addTicketToGeneratedTickets(TicketImpl ticket)
+	public boolean addTicketToGeneratedTickets(Ticket ticket)
 	{
 		tickets.add(ticket);
 		return true;
 	}
 	
-	public TicketImpl validateTicket(int ticketReferenceNumber, String vehicleNumber) throws CustomException
+	public Ticket validateTicket(int ticketReferenceNumber, String vehicleNumber) throws CustomException, RemoteException
 	{	
 		boolean flag=false;
-		TicketImpl submittedTicket=null;
+		Ticket submittedTicket=null;
 		
-		for(TicketImpl ticket: tickets)
+		for(Ticket ticket: tickets)
 		{
 			if(ticket.getTicketReferenceNumber()==ticketReferenceNumber)
 			{	
@@ -54,7 +58,7 @@ public class Register {
 		
 	}
 	
-	public Set<Ticket> generateReport(String choice,Calendar start )
+	public Set<Ticket> generateReport(String choice,Calendar start ) throws RemoteException
 	{	
 		
 		Calendar stop=(Calendar)start.clone();
@@ -111,7 +115,7 @@ public class Register {
 	}
 	
 	
-	public int findBusiestHourOfTheMonth(Calendar startOfMonth)
+	public int findBusiestHourOfTheMonth(Calendar startOfMonth) throws RemoteException
 	{
 		
 		
@@ -187,10 +191,10 @@ public class Register {
 		return tickets;
 	}
 	
-	public TicketImpl getSpecificTicket(int ticketRefNum)
+	public Ticket getSpecificTicket(int ticketRefNum) throws RemoteException
 	{
-		TicketImpl specificTicket=null;
-		for(TicketImpl t : tickets)
+		Ticket specificTicket=null;
+		for(Ticket t : tickets)
 		{
 			if (t.getTicketReferenceNumber()==ticketRefNum)
 				specificTicket= t;

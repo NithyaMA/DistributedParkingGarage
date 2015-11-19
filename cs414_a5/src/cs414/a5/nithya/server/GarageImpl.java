@@ -8,6 +8,8 @@ import java.util.Map;
 import java.util.Set;
 
 
+
+import cs414.a5.nithya.common.CustomException;
 import cs414.a5.nithya.common.Customer;
 import cs414.a5.nithya.common.Garage;
 import cs414.a5.nithya.common.Ticket;
@@ -79,7 +81,7 @@ public class GarageImpl extends java.rmi.server.UnicastRemoteObject implements G
 	}
 	
 	@Override
-	public Ticket enterGarage(Customer customer) throws RemoteException
+	public Ticket enterGarage(Customer customer) throws RemoteException, CustomException
 
 	{	
 		if(garageStatus.equals(GarageStatus.available))
@@ -112,7 +114,7 @@ public class GarageImpl extends java.rmi.server.UnicastRemoteObject implements G
 	
 	
 	@Override
-	public Ticket validateTicketForExitingGarage(int ticketReferenceNumber, String vehicleNumber)
+	public Ticket validateTicketForExitingGarage(int ticketReferenceNumber, String vehicleNumber) throws RemoteException, CustomException
 	{
 		return register.validateTicket(ticketReferenceNumber,  vehicleNumber);
 	
@@ -122,7 +124,7 @@ public class GarageImpl extends java.rmi.server.UnicastRemoteObject implements G
 	public float payParkingFeeByCash( int ticketReferenceNum, float amount) throws RemoteException
 	{
 		
-		TicketImpl ticket=register.getSpecificTicket(ticketReferenceNum);
+		Ticket ticket=register.getSpecificTicket(ticketReferenceNum);
 		float fee=ticket.getTotalParkingFee();
 		Payment payment= new Payment();
 		float balanceDue=payment.makePaymentByCash(fee, amount);
@@ -138,7 +140,7 @@ public class GarageImpl extends java.rmi.server.UnicastRemoteObject implements G
 	@Override
 	public boolean payParkingFeeByCard(int ticketReferenceNum, Long cardNumber, Date expiryDate) throws RemoteException
 	{
-		TicketImpl ticket=register.getSpecificTicket(ticketReferenceNum);
+		Ticket ticket=register.getSpecificTicket(ticketReferenceNum);
 		Payment payment= new Payment();
 		if(payment.makePaymentByCard(cardNumber, expiryDate))
 		{
@@ -154,7 +156,7 @@ public class GarageImpl extends java.rmi.server.UnicastRemoteObject implements G
 		 return false;
 	}
 	
-	public Set<Ticket> generateReport(String choice, Calendar start)
+	public Set<Ticket> generateReport(String choice, Calendar start) throws RemoteException
 	{
 		return register.generateReport(choice, start);
 	}
@@ -167,7 +169,7 @@ public class GarageImpl extends java.rmi.server.UnicastRemoteObject implements G
 			this.garageStatus= GarageStatus.full;
 	}
 	
-	public int findBusiestHourOfMonth(Calendar month)
+	public int findBusiestHourOfMonth(Calendar month) throws RemoteException
 	{
 		return register.findBusiestHourOfTheMonth(month);
 	}
@@ -188,7 +190,7 @@ public class GarageImpl extends java.rmi.server.UnicastRemoteObject implements G
 		return this.admin.authorizeAdmin(userName, password);
 	}
 	
-	public void stimulateTime(String testingChoice, Calendar cal, int ticketNum)
+	public void stimulateTime(String testingChoice, Calendar cal, int ticketNum) throws CustomException, RemoteException
 	{
 		if (testingChoice.equals("entry"))
 		{
@@ -201,24 +203,13 @@ public class GarageImpl extends java.rmi.server.UnicastRemoteObject implements G
 		else
 			throw new CustomException("Testing choice provided is not correct. Please try again");
 	}
-	public class CustomException extends RuntimeException
-	{
-		
-		private static final long serialVersionUID = 1L;
-		
-		public CustomException(String message)
-		{
-			super(message);
-		}
-	}
-
 	
-	public Ticket helpCustomerToReprintTicket(String vehicleNumber)
+	public Ticket helpCustomerToReprintTicket(String vehicleNumber) throws RemoteException
 	{
 		return admin.helpCustomerToRePrintTicket(vehicleNumber);
 	}
 	
-	public float lendMoneyToCashlessCustomerToExitGarage(Integer ticketRefNum)
+	public float lendMoneyToCashlessCustomerToExitGarage(Integer ticketRefNum) throws RemoteException
 	{
 		return admin.lendMoneyToCashlessCustomerToExitGarage(ticketRefNum);
 	}

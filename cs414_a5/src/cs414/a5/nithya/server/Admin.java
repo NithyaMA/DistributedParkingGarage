@@ -1,12 +1,14 @@
 package cs414.a5.nithya.server;
 
+import java.io.Serializable;
+import java.rmi.RemoteException;
 import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Set;
 
 import cs414.a5.nithya.common.*;
 
-public class Admin {
+public class Admin implements Serializable{
 
 	private String userName;
 	private String password;
@@ -30,7 +32,7 @@ public class Admin {
 	}
 	
 	
-	public void  stimulateTimeForEntry(Calendar cal, int ticketNum)
+	public void  stimulateTimeForEntry(Calendar cal, int ticketNum) throws RemoteException
 	{
 		
 		for(Ticket t: this.register.getTickets())
@@ -44,7 +46,7 @@ public class Admin {
 	
 }
 	
-	public void  stimulateTimeForExit(Calendar cal, int ticketNum)
+	public void  stimulateTimeForExit(Calendar cal, int ticketNum) throws RemoteException
 	{
 		for(Ticket t: this.register.getTickets())
 		{
@@ -57,7 +59,7 @@ public class Admin {
 	
 }
 	
-	public Ticket helpCustomerToRePrintTicket(String vehicleNumber)
+	public Ticket helpCustomerToRePrintTicket(String vehicleNumber) throws RemoteException
 	{
 		Ticket rePrintedTicket= null;
 		for(Ticket t: this.register.getTickets())
@@ -72,7 +74,7 @@ public class Admin {
 	
 	}
 	
-	public float lendMoneyToCashlessCustomerToExitGarage(Integer ticketRefNum)
+	public float lendMoneyToCashlessCustomerToExitGarage(Integer ticketRefNum) throws RemoteException
 	{
 		float loanAmount=(float) 0.0;
 		for(Ticket t: this.register.getTickets())

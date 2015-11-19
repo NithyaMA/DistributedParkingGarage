@@ -1,8 +1,9 @@
 package cs414.a5.nithya.server;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Payment {
+public class Payment implements Serializable {
 	
 	
 	
