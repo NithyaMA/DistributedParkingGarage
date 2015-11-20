@@ -1,6 +1,8 @@
 package cs414.a5.nithya.server;
 
-public enum TicketStatus {
+import java.io.Serializable;
+
+public enum TicketStatus implements Serializable{
 
 	pending,
 	paid;

@@ -1,10 +1,11 @@
 package cs414.a5.nithya.server;
 
+import java.io.Serializable;
 import java.util.Calendar;
 
 import cs414.a5.nithya.common.ExitKiosk;
 
-public class ExitKioskImpl implements ExitKiosk {
+public class ExitKioskImpl implements Serializable, ExitKiosk {
 	private String kioskNumber;
 	private boolean exitGate;
 	private Register register;
