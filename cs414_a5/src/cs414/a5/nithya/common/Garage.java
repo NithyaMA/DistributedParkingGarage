@@ -44,6 +44,8 @@ public interface Garage extends java.rmi.Remote  {
 	public EntryKiosk getEntryKiosk() throws java.rmi.RemoteException;
 	
 	public ExitKiosk getExitKiosk() throws java.rmi.RemoteException;
+	
+	public boolean isGarageFull() throws java.rmi.RemoteException;
 		
 	
 	

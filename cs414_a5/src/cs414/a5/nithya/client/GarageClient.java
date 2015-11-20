@@ -60,7 +60,7 @@ public class GarageClient {
 	{
 	case 1:
 	{
-		if(garage.getGarageStatus().equals(GarageStatus.full))
+		if(garage.isGarageFull())
 			System.out.println("Sorry, You cannot enter garage. Garage is full");
 		else{
 		System.out.println("Please enter your name");

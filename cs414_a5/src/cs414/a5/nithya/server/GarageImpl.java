@@ -231,4 +231,9 @@ public class GarageImpl extends java.rmi.server.UnicastRemoteObject implements G
 	public ExitKiosk getExitKiosk() {
 		return exitKiosk;
 	}
+	
+	public boolean isGarageFull()
+	{
+		return garageStatus.equals(GarageStatus.full);
+	}
 }
