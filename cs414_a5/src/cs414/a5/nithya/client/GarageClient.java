@@ -45,7 +45,7 @@ public class GarageClient {
 	System.out.println("We have the following options. Please enter the number of your choice");
 	System.out.println("1. Enter Garage");
 	System.out.println("2. Exit Garage");
-	System.out.println("3. Generate Reports(only for authorized pesons)"); 
+	System.out.println("3. Administrator Options"); 
 	System.out.println("4. Stuck in Garage. Need help");
 	System.out.println("5. Exit Menu");
 
