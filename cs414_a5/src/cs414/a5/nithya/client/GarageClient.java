@@ -13,10 +13,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Set;
 
-
-
-import cs414.a5.nithya.common.*;
-import cs414.a5.nithya.server.GarageStatus;
+import cs414.a5.nithya.common.Customer;
+import cs414.a5.nithya.common.Garage;
+import cs414.a5.nithya.common.Ticket;
 
 
 

@@ -4,8 +4,10 @@ import java.rmi.RemoteException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+
 
 
 
@@ -30,15 +32,21 @@ public class GarageImpl extends java.rmi.server.UnicastRemoteObject implements G
 	private int totalOccupiedSpaces;
 	private int totalUnoccupiedSpaces;
 	private Map <Integer, String>parkingLots= new HashMap<Integer, String>();
-	private EntryKiosk entryKiosk;
-	private ExitKiosk exitKiosk;
+	private Set<EntryKiosk> entryKioskSet;
+	private Set<ExitKiosk> exitKioskSet;
+	private EntryKiosk entryKiosk;//current entry kiosk
+	private ExitKiosk exitKiosk;// current exit kiosk
 	private Register register;
 	private Admin admin;
+	private EntryKiosk entryKiosk1;
+	private EntryKiosk entryKiosk2;
+	private ExitKiosk exitKiosk1;
+	private ExitKiosk exitKiosk2;
 	
 	
 	
 	
-	public GarageImpl(String name, int numberOfParkingLots, EntryKiosk entryKiosk, ExitKiosk exitKiosk, Register register, Admin admin) throws RemoteException
+	public GarageImpl(String name, int numberOfParkingLots, Set<EntryKiosk> entryKioskGroup, Set<ExitKiosk> exitKioskGroup, Register register, Admin admin) throws RemoteException
 	{
 		this.name=name;
 	
@@ -49,8 +57,14 @@ public class GarageImpl extends java.rmi.server.UnicastRemoteObject implements G
 		this.totalOccupiedSpaces=0;
         this.totalUnoccupiedSpaces=numberOfParkingLots;
 		this.garageStatus= GarageStatus.available;
-		this.entryKiosk=entryKiosk;
-		this.exitKiosk=exitKiosk;
+		for(EntryKiosk entryK: entryKioskGroup)
+		{
+			this.entryKioskSet.add(entryK);
+		}
+		for(ExitKiosk exitK: exitKioskGroup)
+		{
+			this.exitKioskSet.add(exitK);
+		}
 		this.register=register;
 		this.admin=admin;
 	}
@@ -59,8 +73,17 @@ public class GarageImpl extends java.rmi.server.UnicastRemoteObject implements G
 	public GarageImpl() throws RemoteException
 	{
 		Register register= new Register();
-		EntryKiosk entryKiosk= new EntryKioskImpl("en1",register);
-		ExitKiosk exitKiosk= new ExitKioskImpl("en2", register);
+		entryKiosk1= new EntryKioskImpl("en1",register);
+		entryKiosk2= new EntryKioskImpl("en2",register);
+		exitKiosk1= new ExitKioskImpl("ex1", register);
+		exitKiosk2= new ExitKioskImpl("ex2", register);
+		Set<EntryKiosk> entryKioskGroup= new HashSet<EntryKiosk>();
+		entryKioskGroup.add(entryKiosk1);
+		entryKioskGroup.add(entryKiosk2);
+		Set<ExitKiosk> exitKioskGroup= new HashSet<ExitKiosk>();
+		exitKioskGroup.add(exitKiosk1);
+		exitKioskGroup.add(exitKiosk2);
+		
 		Admin admin= new Admin("admin", "admin123", register);
 		String name= "CS414";
 		int numberOfParkingLots= 3;
@@ -74,12 +97,23 @@ public class GarageImpl extends java.rmi.server.UnicastRemoteObject implements G
 		this.totalOccupiedSpaces=0;
         this.totalUnoccupiedSpaces=numberOfParkingLots;
 		this.garageStatus= GarageStatus.available;
-		this.entryKiosk=entryKiosk;
-		this.exitKiosk=exitKiosk;
 		this.register=register;
 		this.admin=admin;
 	}
 	
+	public void setCurrenKiosk(String kioskName)
+	{
+		if(kioskName.equals("en1"))
+			this.entryKiosk=entryKiosk1;
+		if(kioskName.equals("en2"))
+			this.entryKiosk=entryKiosk2;
+		if(kioskName.equals("ex1"))
+			this.exitKiosk=exitKiosk1;
+		if(kioskName.equals("ex2"))
+			this.exitKiosk=exitKiosk2;
+		
+		
+	}
 	@Override
 	public Ticket enterGarage(Customer customer) throws RemoteException, CustomException
 
