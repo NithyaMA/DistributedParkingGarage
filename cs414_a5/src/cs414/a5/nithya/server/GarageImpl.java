@@ -101,7 +101,7 @@ public class GarageImpl extends java.rmi.server.UnicastRemoteObject implements G
 		this.admin=admin;
 	}
 	
-	public void setCurrenKiosk(String kioskName)
+	public void setCurrenKiosk(String kioskName) throws RemoteException
 	{
 		if(kioskName.equals("en1"))
 			this.entryKiosk=entryKiosk1;

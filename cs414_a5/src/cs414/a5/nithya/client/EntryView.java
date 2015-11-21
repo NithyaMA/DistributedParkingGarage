@@ -4,6 +4,7 @@ package cs414.a5.nithya.client;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.rmi.RemoteException;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -13,23 +14,62 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class EntryClient {
+import cs414.a5.nithya.common.Garage;
+import cs414.a5.nithya.common.Ticket;
+
+public class EntryView {
 	
 	private JFrame entryFrame;
 	private JPanel mainPanel;
+	private JPanel ticketPanel;
 	private JLabel nameLabel;
 	private JLabel phoneLabel;
 	private JLabel emailLabel;
 	private JLabel vehicleNumLabel;
+	
+	private JLabel ticketNum;
+	private JLabel assignedLot;
+	private JLabel timeOfEntry;
+	private JLabel parkingRate;
+	
 	private JTextField nameField;
 	private JTextField phoneField;
 	private JTextField emailField;
 	private JTextField vehicleNumField;
 	private JButton addButton;
+	private Garage garage;
 	
+	
+		public EntryView(Garage garage)
+		{
+			this.garage=garage;
+		}
+		public JTextField getName()
+		{
+			return nameField;
+		}
+
+		public JTextField getPhone()
+		{
+			return phoneField;
+		}
+
+		public JTextField getEmail()
+		{
+			return emailField;
+		}
+
+		public JTextField getVehicleNum()
+		{
+			return vehicleNumField;
+		}
 		
-		
+		public Garage getGarage()
+		{
+			return garage;
+		}
 		public void run()
+		
 		{
 		JFrame.setDefaultLookAndFeelDecorated(true);
 		entryFrame = new JFrame("Enter Garage");
@@ -50,6 +90,7 @@ public class EntryClient {
 	    vehicleNumField= new JTextField(10);
 
 	    addButton = new JButton("Add");
+	    addButton.addActionListener(new EntryActionListener(this));
 
 	    //addButton.addActionListener();
 
@@ -114,6 +155,34 @@ public class EntryClient {
     entryFrame.pack();
 	entryFrame.setVisible(true);
 }
+		
+		public void displayTicket(Ticket ticket) throws RemoteException
+		{
+
+			
+			JFrame.setDefaultLookAndFeelDecorated(true);
+			entryFrame = new JFrame("Enter Garage");
+			entryFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
+			
+			mainPanel= new JPanel();
+			mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.PAGE_AXIS));
+		    mainPanel.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
+		    
+		    ticketNum= new JLabel("Ticket Num");
+		    assignedLot = new JLabel("Assigned Lot");
+		    timeOfEntry = new JLabel("Time of Entry");
+		    parkingRate= new JLabel("Rate of Parking");
+		    
+		    ticketNum.setText("Ticket Num :    " + ticket.getTicketReferenceNumber());
+		    assignedLot.setText("Assigned Parking Lot :    " + ticket.getAssignedParkingLot());
+		    timeOfEntry.setText("Time of Entry is :    " + ticket.getTimeOfEntry().getTime());
+		    parkingRate.setText("Parking Rate Per Hour is    " + ticket.getParkingRate() + "$");
+		    
+		    
+		    
+		    
+		    
+		}
 
 
 

@@ -1,5 +1,6 @@
 package cs414.a5.nithya.common;
 
+import java.rmi.RemoteException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Set;
@@ -46,6 +47,8 @@ public interface Garage extends java.rmi.Remote  {
 	public ExitKiosk getExitKiosk() throws java.rmi.RemoteException;
 	
 	public boolean isGarageFull() throws java.rmi.RemoteException;
+	
+	public void setCurrenKiosk(String kioskName) throws java.rmi.RemoteException;
 		
 	
 	

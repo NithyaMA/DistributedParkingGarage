@@ -13,7 +13,7 @@ public class Admin implements Serializable{
 	private String userName;
 	private String password;
 	private Register register;
-	private ExitKiosk exitKiosk;
+
 	
 	
 	public Admin(String userName, String password, Register register)
