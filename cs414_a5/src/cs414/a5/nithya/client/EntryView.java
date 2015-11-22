@@ -4,6 +4,7 @@ package cs414.a5.nithya.client;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
 import javax.swing.BorderFactory;
@@ -20,8 +21,8 @@ import cs414.a5.nithya.common.Ticket;
 public class EntryView {
 	
 	private JFrame entryFrame;
-	private JPanel mainPanel;
-	private JPanel ticketPanel;
+	private JPanel mainPanel,displayPanel, gatePanel;
+	
 	private JLabel nameLabel;
 	private JLabel phoneLabel;
 	private JLabel emailLabel;
@@ -177,8 +178,14 @@ public class EntryView {
 			
 			mainPanel= new JPanel();
 			mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.PAGE_AXIS));
-		    mainPanel.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
+		      mainPanel.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
+		      
+		    displayPanel= new JPanel();
+		    gatePanel= new JPanel();
 		    
+		    displayPanel.setBorder(BorderFactory.createCompoundBorder(
+		              BorderFactory.createTitledBorder("Ticket Details"), 
+		              BorderFactory.createEmptyBorder(5,5,5,5)));
 		    ticketNum= new JLabel("Ticket Num");
 		    assignedLot = new JLabel("Assigned Lot");
 		    timeOfEntry = new JLabel("Time of Entry");
@@ -193,14 +200,47 @@ public class EntryView {
 		    addButton = new JButton("Proceed");
 		    addButton.addActionListener(new EntryActionListener2(this));
 		    
+		    displayPanel.setLayout(new GridBagLayout());
+
+		    GridBagConstraints gc = new GridBagConstraints();
+
+		    // // First column /////////////////////////
+
+		    gc.anchor = GridBagConstraints.LINE_END;
+		    gc.weightx = 0.5;
+		    gc.weighty = 0.5;
+
+		    gc.gridx = 0;
+		    gc.gridy = 0;
+		    displayPanel.add(ticketNum, gc);
+
+		    gc.gridx = 0;
+		    gc.gridy = 1;
+		    displayPanel.add(assignedLot, gc);
 		    
-		    mainPanel.add(ticketNum);
-		    mainPanel.add(assignedLot);
-		    mainPanel.add(timeOfEntry);
-		    mainPanel.add(parkingRate);
-		    mainPanel.add(entryGateStatus);
-		    mainPanel.add(addButton);
+		    gc.gridx = 0;
+		    gc.gridy = 2;
+		    displayPanel.add(timeOfEntry, gc);
 		    
+		    gc.gridx = 0;
+		    gc.gridy = 3;
+		    displayPanel.add(parkingRate, gc);
+
+		/*    
+		   displayPanel.add(ticketNum);
+		   displayPanel.add(assignedLot);
+		   displayPanel.add(timeOfEntry);
+		   displayPanel.add(parkingRate);
+*/
+		   gatePanel.setBorder(BorderFactory.createCompoundBorder(
+		              BorderFactory.createTitledBorder("Gate Status"), 
+		              BorderFactory.createEmptyBorder(5,5,5,5)));
+		  gatePanel.add(entryGateStatus);
+		  gatePanel.add(addButton);
+		    
+		  
+		  mainPanel.add(displayPanel);
+		  mainPanel.add(gatePanel);
 		    entryFrame.setContentPane(mainPanel);
 		    entryFrame.pack();
 			entryFrame.setVisible(true);
@@ -213,6 +253,8 @@ public class EntryView {
 		}
 
 
+		
+	
 
 
 }

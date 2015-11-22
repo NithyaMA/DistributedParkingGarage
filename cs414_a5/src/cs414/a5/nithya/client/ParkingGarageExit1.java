@@ -122,7 +122,7 @@ public class ParkingGarageExit1 implements ActionListener {
            
            if (garageChoices.getSelectedItem().equals("Exit Garage"))
            {
-        	   ExitView exitView= new ExitView();
+        	   ExitView exitView= new ExitView(garage);
         	   exitView.run();
            }
           
