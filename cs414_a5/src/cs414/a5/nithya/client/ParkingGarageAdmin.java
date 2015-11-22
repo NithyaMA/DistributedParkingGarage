@@ -120,16 +120,18 @@ public class ParkingGarageAdmin implements ActionListener {
 	public void actionPerformed(ActionEvent event) {
         if ("comboBoxChanged".equals(event.getActionCommand())) {
            
-        	  if (garageChoices.getSelectedItem().equals("Administrator Options"))
+        	  if (garageChoices.getSelectedItem().equals("Administrator options"))
               {
            	   AdminOptionView adminOptionView= new AdminOptionView(garage);
            	   adminOptionView.run();
+           	   garageFrame.dispose();
               }
              
            else if (garageChoices.getSelectedItem().equals("Exit from menu"))
            {
         	  TerminationView terminationView= new TerminationView();
         	  terminationView.run();
+        	  garageFrame.dispose();
            }
     }
 	}

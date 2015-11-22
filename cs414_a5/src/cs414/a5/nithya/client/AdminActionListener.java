@@ -17,7 +17,15 @@ public class AdminActionListener implements ActionListener{
       	  if (aov.getAdminChoices().getSelectedItem().equals("Hourly Report"))
             {
          	   aov.getGarageFrame().dispose();
+         	   aov.hourlyView();
             }
+      	  
+      	else if (aov.getAdminChoices().getSelectedItem().equals("Daily Report"))
+        {
+     	 
+       	 aov.getGarageFrame().dispose();
+       	 aov.dailyView();
+        }
            
          else if (aov.getAdminChoices().getSelectedItem().equals("Weekly Report"))
          {
