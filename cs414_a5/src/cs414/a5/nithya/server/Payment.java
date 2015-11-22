@@ -3,11 +3,13 @@ package cs414.a5.nithya.server;
 import java.io.Serializable;
 import java.util.Date;
 
+import cs414.a5.nithya.common.CustomException;
+
 public class Payment implements Serializable {
 	
 	
 	
-	public float makePaymentByCash(float parkingFee,float amount)
+	public float makePaymentByCash(float parkingFee,float amount) throws CustomException
 	{
 		if (parkingFee==amount)
 			return (float) 0.0;
@@ -19,7 +21,7 @@ public class Payment implements Serializable {
 		else
 			throw new CustomException("Cash provided is less than the parking fee. Transaction is cancelled");
 	}
-	public boolean makePaymentByCard(long cardNumber, Date expiryDate)
+	public boolean makePaymentByCard(long cardNumber, Date expiryDate) throws CustomException
 	{
 		Date date= new Date();
 		if (date.before(expiryDate))
@@ -138,14 +140,5 @@ public boolean hasRequiredBalance(long cardNumber)
 	return true;
 }
 
-public class CustomException extends RuntimeException
-{
-	
-	private static final long serialVersionUID = 1L;
-	
-	public CustomException(String message)
-	{
-		super(message);
-	}
-}
+
 }

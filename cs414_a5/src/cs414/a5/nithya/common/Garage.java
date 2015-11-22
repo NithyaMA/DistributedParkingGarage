@@ -14,9 +14,9 @@ public interface Garage extends java.rmi.Remote  {
 	
 	 Ticket validateTicketForExitingGarage(int ticketReferenceNumber, String vehicleNumber) throws java.rmi.RemoteException, CustomException;
 	
-	 float payParkingFeeByCash( int ticketRefNum, float amount) throws java.rmi.RemoteException;
+	 float payParkingFeeByCash( int ticketRefNum, float amount) throws java.rmi.RemoteException, CustomException;
 	
-	 boolean payParkingFeeByCard(int ticketRefNum, Long cardNumber, Date expiryDate) throws java.rmi.RemoteException;
+	 boolean payParkingFeeByCard(int ticketRefNum, Long cardNumber, Date expiryDate) throws java.rmi.RemoteException, CustomException;
 	
 	Set<Ticket>  generateReport(String choice, Calendar start) throws java.rmi.RemoteException;
 	

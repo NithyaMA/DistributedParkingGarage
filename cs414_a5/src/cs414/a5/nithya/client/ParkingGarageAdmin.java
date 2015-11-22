@@ -122,7 +122,7 @@ public class ParkingGarageAdmin implements ActionListener {
            
         	  if (garageChoices.getSelectedItem().equals("Administrator Options"))
               {
-           	   AdminOptionView adminOptionView= new AdminOptionView();
+           	   AdminOptionView adminOptionView= new AdminOptionView(garage);
            	   adminOptionView.run();
               }
              

@@ -44,6 +44,8 @@ public class ExceptionView {
 		  garageErrorFrame.setContentPane(mainPanel);
 			garageErrorFrame.pack();
 			garageErrorFrame.setVisible(true);
+			
+			
 		  
 	}
 

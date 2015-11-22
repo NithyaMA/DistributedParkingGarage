@@ -12,6 +12,7 @@ import java.util.Set;
 
 
 
+
 import cs414.a5.nithya.common.*;
 
 
@@ -38,6 +39,9 @@ public class Register implements Serializable {
 				flag=true;
 				if(ticket.getCustomer().getvehicleNumber().equals(vehicleNumber))
 				{
+				     if(ticket.getTicketStatus().equals(TicketStatus.paid))
+						throw new CustomException("The vehicle has already exited the garage.");
+					
 					Calendar cal = Calendar.getInstance();
 					ticket.setTimeOfExit(cal);
 					ticket.calculateTotalParkingFee();

@@ -155,7 +155,7 @@ public class GarageImpl extends java.rmi.server.UnicastRemoteObject implements G
 	}
 	
 	@Override
-	public float payParkingFeeByCash( int ticketReferenceNum, float amount) throws RemoteException
+	public float payParkingFeeByCash( int ticketReferenceNum, float amount) throws RemoteException, CustomException
 	{
 		
 		Ticket ticket=register.getSpecificTicket(ticketReferenceNum);
@@ -172,7 +172,7 @@ public class GarageImpl extends java.rmi.server.UnicastRemoteObject implements G
 	}
 	
 	@Override
-	public boolean payParkingFeeByCard(int ticketReferenceNum, Long cardNumber, Date expiryDate) throws RemoteException
+	public boolean payParkingFeeByCard(int ticketReferenceNum, Long cardNumber, Date expiryDate) throws RemoteException, CustomException
 	{
 		Ticket ticket=register.getSpecificTicket(ticketReferenceNum);
 		Payment payment= new Payment();

@@ -396,9 +396,9 @@ public class ExitView {
 	              BorderFactory.createEmptyBorder(5,5,5,5)));
 	   exitGateStatus= new JLabel();
 		if(garage.getExitKiosk().isExitGate())
-			exitGateStatus.setText("Entry gate " + garage.getExitKiosk().getName() + " is open");
+			exitGateStatus.setText("Exit gate " + garage.getExitKiosk().getName() + " is open");
 		 addButton = new JButton("Submit");
-		    addButton.addActionListener(new ExitActionListener4(this));
+		    addButton.addActionListener(new ExitActionListener6(this));
 		    mainPanel.add(exitGateStatus);
 		    mainPanel.add(addButton);
 		    exitFrame.setContentPane(mainPanel);

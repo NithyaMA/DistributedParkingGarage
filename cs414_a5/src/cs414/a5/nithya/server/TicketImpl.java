@@ -12,7 +12,7 @@ public class TicketImpl implements Serializable, Ticket {
 	private int assignedParkingLot;
 	private Customer customer;
 	private Calendar timeOfEntry;
-	private Calendar timeOfExit;
+	private Calendar timeOfExit= null;
 	private float parkingRate;
 	private TicketStatus ticketStatus;
 	private float totalParkingFee;
