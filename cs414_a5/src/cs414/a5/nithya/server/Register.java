@@ -2,10 +2,17 @@ package cs414.a5.nithya.server;
 
 import java.io.Serializable;
 import java.rmi.RemoteException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+
+
+
+
 
 
 
@@ -119,13 +126,15 @@ public class Register implements Serializable {
 	}
 	
 	
-	public int findBusiestHourOfTheMonth(Calendar startOfMonth) throws RemoteException
+	/*public int findBusiestHourOfTheMonth(Calendar startOfMonth) throws RemoteException
 	{
 		
 		
 		Calendar stopOfMonth =(Calendar) startOfMonth.clone();
 		Calendar cal = (Calendar) startOfMonth.clone();
+		
 		stopOfMonth.set(Calendar.DATE, 30);
+		
 		int[] occupancyNumbers= new int[30];
 		int dat=0;
 		
@@ -184,10 +193,62 @@ public class Register implements Serializable {
 			   }
 			   return (busiestHour-1);
 			   
-		}
+		}*/
 		
 		
 			   
+	
+	public int findBusiestHourOfTheMonth(Calendar startOfMonth) throws RemoteException, ParseException
+	{
+		Calendar reqCal;
+		Calendar cal= Calendar.getInstance();
+		if (startOfMonth.MONTH ==  cal.MONTH)
+		
+		{
+			Date date= new Date();
+			startOfMonth.setTime(date);
+			reqCal=startOfMonth;
+		}
+		else
+		{
+		     startOfMonth.set(Calendar.DATE, 15);
+		     reqCal=startOfMonth;
+		}
+		
+		int [] occupants= new int[25];
+		 
+		 String[] str={"00:00:00", "01:00:00","02:00:00","03:00:00","04:00:00","05:00:00","06:00:00","07:00:00","08:00:00","09:00:00","10:00:00","11:00:00","12:00:00","13:00:00","14:00:00","15:00:00","16:00:00","17:00:00","18:00:00","19:00:00","20:00:00","21:00:00","22:00:00","23:00:00"};
+		   for (int hr=0; hr<24; hr++) 
+		   {
+			  
+			   Date d= reqCal.getTime();
+			   DateFormat df= new SimpleDateFormat("dd-MM-yyyy");
+			   String sd= df.format(d);
+			    String s= sd + " " + str[hr];
+			    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
+				Date date=null;
+				date=sdf.parse(s);
+				reqCal.setTime(date);
+			    Set <Ticket> reportTickets=(generateReport("hourly", reqCal));
+			   
+			    int occupNum= reportTickets.size();
+			  occupants[hr]= occupNum;  
+			
+				
+		   }
+		   int max=0;
+		   for(int i=0; i< 23; i++)
+		   {
+			   if(occupants[i]<occupants[i+1])
+				   max= i+1;
+			   
+		   }
+		   
+		   
+		   
+		return max;
+		}
+		
 		
 				
 	

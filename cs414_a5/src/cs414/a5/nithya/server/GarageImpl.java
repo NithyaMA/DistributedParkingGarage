@@ -1,12 +1,14 @@
 package cs414.a5.nithya.server;
 
 import java.rmi.RemoteException;
+import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+
 
 
 
@@ -203,7 +205,7 @@ public class GarageImpl extends java.rmi.server.UnicastRemoteObject implements G
 			this.garageStatus= GarageStatus.full;
 	}
 	
-	public int findBusiestHourOfMonth(Calendar month) throws RemoteException
+	public int findBusiestHourOfMonth(Calendar month) throws RemoteException, ParseException
 	{
 		return register.findBusiestHourOfTheMonth(month);
 	}

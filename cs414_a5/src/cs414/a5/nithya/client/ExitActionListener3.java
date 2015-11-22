@@ -30,7 +30,7 @@ public class ExitActionListener3 implements ActionListener{
 			}
 			
 			if(exitView.getGarage().getExitKiosk().isExitGate())
-				exitView.getExitGateStatusLabel().setText("Entry gate " + exitView.getGarage().getExitKiosk().getName() + " is open");
+				exitView.getExitGateStatusLabel().setText("Exit gate " + exitView.getGarage().getExitKiosk().getName() + " is open");
 
 		} catch (RemoteException e1) {
 			// TODO Auto-generated catch block

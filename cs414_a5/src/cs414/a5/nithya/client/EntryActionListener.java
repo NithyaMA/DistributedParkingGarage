@@ -32,7 +32,7 @@ public class EntryActionListener implements ActionListener{
 				entryView.getEntryGateStatusLabel().setText("Entry gate " + entryView.getGarage().getEntryKiosk().getName() + " is open");
 
 			try{
-				Thread.sleep(6000);
+				Thread.sleep(2000);
 				entryView.getGarage().activateSensor("entry");
 				}
 				catch(InterruptedException ie)

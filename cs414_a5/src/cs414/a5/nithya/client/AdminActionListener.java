@@ -31,26 +31,31 @@ public class AdminActionListener implements ActionListener{
          {
       	 
         	 aov.getGarageFrame().dispose();
+        	 aov.weeklyView();
          }
          else if (aov.getAdminChoices().getSelectedItem().equals("Monthly Report"))
          {
       	 
         	 aov.getGarageFrame().dispose();
+        	 aov.monthlyView();
          }
          else if (aov.getAdminChoices().getSelectedItem().equals("Busiest hour of month"))
          {
       	 
         	 aov.getGarageFrame().dispose();
+        	 aov.busiestHourView();
          }
          else if (aov.getAdminChoices().getSelectedItem().equals("Reprint ticket"))
          {
       	  
         	 aov.getGarageFrame().dispose();
+        	 aov.reprintTicketView();
          }
          else if (aov.getAdminChoices().getSelectedItem().equals("Lend Money"))
          {
       	  
         	 aov.getGarageFrame().dispose();
+        	 aov.lendMoneyView();
          }
          else if (aov.getAdminChoices().getSelectedItem().equals("Exit"))
          {

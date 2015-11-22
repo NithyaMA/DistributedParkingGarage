@@ -101,5 +101,141 @@ public class AdminActionListener2 implements ActionListener {
 			aov.viewReport(numOfCars, s);
 		}
 		
+		else if (aov.getStartLabel().getText().equals("Start of Week (dd-mm-yyyy): "))
+		{
+			System.out.println("rrrrr");
+			String s=null;
+			int numOfCars = 0;
+			String str= aov.getStartField().getText();
+			aov.getGarageFrame().dispose();
+			SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy");
+			Date date= null;
+			try {
+				date = sdf.parse(str);
+				
+			} catch (ParseException e2) {
+				// TODO Auto-generated catch block
+				ExceptionView ev= new ExceptionView(e2.getMessage());
+			}
+			
+			Calendar start= Calendar.getInstance();
+			start.setTime(date);
+			try {
+				Set<Ticket> reportTickets=aov.getGarage().generateReport("weekly", start);
+				numOfCars= reportTickets.size();
+				s= "Customers and their Vehicle numbers are ";
+				for(Ticket t: reportTickets)
+				{
+					s= s+ "   " + t.getCustomer().getName()  + " : " + t.getCustomer().getvehicleNumber();
+					
+				}
+			} catch (RemoteException e1) {
+				// TODO Auto-generated catch block
+				ExceptionView ev= new ExceptionView(e1.getMessage());
+			}
+			aov.viewReport(numOfCars, s);
+		}
+		
+		else if (aov.getStartLabel().getText().equals("Month (mm-yyyy): "))
+		{
+			System.out.println("rrpp");
+			String s=null;
+			int numOfCars = 0;
+			String str= aov.getStartField().getText();
+			aov.getGarageFrame().dispose();
+			SimpleDateFormat sdf = new SimpleDateFormat("M-yyyy");
+			Date date= null;
+			try {
+				date = sdf.parse(str);
+				
+			} catch (ParseException e2) {
+				// TODO Auto-generated catch block
+				ExceptionView ev= new ExceptionView(e2.getMessage());
+			}
+			
+			Calendar start= Calendar.getInstance();
+			start.setTime(date);
+			try {
+				Set<Ticket> reportTickets=aov.getGarage().generateReport("monthly", start);
+				numOfCars= reportTickets.size();
+				s= "Customers and their Vehicle numbers are ";
+				for(Ticket t: reportTickets)
+				{
+					s= s+ "   " + t.getCustomer().getName()  + " : " + t.getCustomer().getvehicleNumber();
+					
+				}
+			} catch (RemoteException e1) {
+				// TODO Auto-generated catch block
+				ExceptionView ev= new ExceptionView(e1.getMessage());
+			}
+			aov.viewReport(numOfCars, s);
+		}
+		
+		else if (aov.getStartLabel().getText().equals("Provide Month (mm-yyyy): "))
+		{
+			System.out.println("yyy");
+			int hour=0;
+			String str= aov.getStartField().getText();
+			aov.getGarageFrame().dispose();
+			SimpleDateFormat sdf = new SimpleDateFormat("M-yyyy");
+			Date date= null;
+			try {
+				date = sdf.parse(str);
+				
+			} catch (ParseException e2) {
+				// TODO Auto-generated catch block
+				ExceptionView ev= new ExceptionView(e2.getMessage());
+			}
+			
+			Calendar start= Calendar.getInstance();
+			start.setTime(date);
+			try {
+				 hour=aov.getGarage().findBusiestHourOfMonth(start);
+				 System.out.println(hour);
+			} catch (RemoteException e1) {
+				// TODO Auto-generated catch block
+				ExceptionView ev= new ExceptionView(e1.getMessage());
+			} catch (ParseException e1) {
+				// TODO Auto-generated catch block
+				ExceptionView ev= new ExceptionView(e1.getMessage());
+			}
+			aov.viewBusiestHour(hour);
+		}
+		else if (aov.getStartLabel().getText().equals("Vehicle Number : "))
+		{
+			Ticket t= null;
+			String str= aov.getStartField().getText();
+			aov.getGarageFrame().dispose();
+			try {
+				 t=aov.getGarage().helpCustomerToReprintTicket(str);
+			} catch (RemoteException e1) {
+				// TODO Auto-generated catch block
+				ExceptionView ev= new ExceptionView(e1.getMessage());
+			}
+			
+			try {
+				aov.showPrintedTicket(t.getTicketReferenceNumber());
+			} catch (RemoteException e1) {
+				// TODO Auto-generated catch block
+				ExceptionView ev= new ExceptionView(e1.getMessage());
+			}
+		}
+		else if (aov.getStartLabel().getText().equals("Ticket Ref Number: "))
+		{
+			Float loanAmount=(float) 0.0;
+			String str= aov.getStartField().getText();
+			aov.getGarageFrame().dispose();
+			try {
+				loanAmount= aov.getGarage().lendMoneyToCashlessCustomerToExitGarage(Integer.parseInt(str));
+			} catch (NumberFormatException e1) {
+				// TODO Auto-generated catch block
+				ExceptionView ev= new ExceptionView(e1.getMessage());
+			} catch (RemoteException e1) {
+				// TODO Auto-generated catch block
+				ExceptionView ev= new ExceptionView(e1.getMessage());
+			}
+			aov.showDebtMoney(loanAmount);
+		}
+		
 	}
 }

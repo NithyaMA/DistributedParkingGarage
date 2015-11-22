@@ -1,6 +1,7 @@
 package cs414.a5.nithya.common;
 
 import java.rmi.RemoteException;
+import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Set;
@@ -22,7 +23,7 @@ public interface Garage extends java.rmi.Remote  {
 	
 	void updateStatus() throws java.rmi.RemoteException;
 	
-	public int findBusiestHourOfMonth(Calendar month) throws java.rmi.RemoteException;
+	public int findBusiestHourOfMonth(Calendar month) throws java.rmi.RemoteException, ParseException;
 	
 	public void activateSensor(String choiceOfGate) throws java.rmi.RemoteException;
 	
