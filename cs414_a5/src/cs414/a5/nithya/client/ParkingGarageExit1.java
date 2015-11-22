@@ -17,7 +17,7 @@ import javax.swing.JPanel;
 import cs414.a5.nithya.common.Garage;
 
 
-public class ParkingGarageEntry1 implements ActionListener {
+public class ParkingGarageExit1 implements ActionListener {
 	
 	Garage garage= null;
 	
@@ -28,14 +28,13 @@ public class ParkingGarageEntry1 implements ActionListener {
     static JFrame garageFrame= null;
     
 	 
-	  public ParkingGarageEntry1() throws RemoteException, NotBoundException
+	  public ParkingGarageExit1() throws RemoteException, NotBoundException
 	  {
-		  
 		  Registry registry= LocateRegistry.getRegistry("localhost");
 		  garage = (Garage) 
 					registry.lookup("garageServer");
 		  
-		 garage.setCurrenKiosk("en1");
+		 garage.setCurrenKiosk("ex1");
 		  
 		  mainPanel = new JPanel();
 	      mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.PAGE_AXIS));
@@ -90,30 +89,22 @@ public class ParkingGarageEntry1 implements ActionListener {
 		 statusLabel.getBorder()));
 		 statusLabel.setText("Garage status : " + garage.getGarageStatus());
 		  
-		  if (garage.getGarageStatus().equals("available"))
-		  { 
-			  String[] garageOptions={"Enter Garage", "Exit from menu"};
+		 
+			  String[] garageOptions={"Exit Garage", "Stuck in garage", "Exit from menu"};
 			  garageChoices= new JComboBox(garageOptions);
-
-			  
-		  }
-		  else 
-		  {
-			  String[] garageOptions={"Exit from menu"};
-			  garageChoices= new JComboBox(garageOptions);
-		  }
+			 
+		
 		
 		 
-		  garageChoices.setSelectedIndex(0);
+		  garageChoices.setSelectedIndex(2);
 		  garageChoices.addActionListener(this);
 		  displayPanel.add(greetingLabel);
 		  displayPanel.add(statusLabel);
 		  selectPanel.add(garageChoices);
-		
 	  }
 	public static void createAndShowGUI() throws RemoteException, NotBoundException
 	{
-		ParkingGarageEntry1 pgc= new ParkingGarageEntry1();
+		ParkingGarageExit1 pgc= new ParkingGarageExit1();
 		JFrame.setDefaultLookAndFeelDecorated(true);
 		garageFrame = new JFrame("Parking Garage");
 		
@@ -128,19 +119,22 @@ public class ParkingGarageEntry1 implements ActionListener {
 	
 	public void actionPerformed(ActionEvent event) {
         if ("comboBoxChanged".equals(event.getActionCommand())) {
-           if (garageChoices.getSelectedItem().equals("Enter Garage"))
+           
+           if (garageChoices.getSelectedItem().equals("Exit Garage"))
            {
-        	   EntryView entryView= new EntryView(garage);
-        	   entryView.run();
-        	   garageFrame.dispose();
+        	   ExitView exitView= new ExitView();
+        	   exitView.run();
            }
           
-         
+           else if (garageChoices.getSelectedItem().equals("Stuck in garage"))
+           {
+        	   HelpView helpView = new HelpView();
+        	   helpView.run();
+           }
            else if (garageChoices.getSelectedItem().equals("Exit from menu"))
            {
         	  TerminationView terminationView= new TerminationView();
         	  terminationView.run();
-        	  garageFrame.dispose();
            }
     }
 	}

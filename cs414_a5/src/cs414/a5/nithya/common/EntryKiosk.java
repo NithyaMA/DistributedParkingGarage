@@ -10,6 +10,9 @@ public interface EntryKiosk extends java.rmi.Remote {
 	public void openEntryGate() throws java.rmi.RemoteException;
 	
 	public void closeEntryGate() throws java.rmi.RemoteException;
+	
+	public String getName() throws java.rmi.RemoteException;
+	
 	 
 	 
 }

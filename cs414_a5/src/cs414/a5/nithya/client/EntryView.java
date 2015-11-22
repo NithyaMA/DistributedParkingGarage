@@ -31,6 +31,7 @@ public class EntryView {
 	private JLabel assignedLot;
 	private JLabel timeOfEntry;
 	private JLabel parkingRate;
+	private JLabel entryGateStatus;
 	
 	private JTextField nameField;
 	private JTextField phoneField;
@@ -64,13 +65,23 @@ public class EntryView {
 			return vehicleNumField;
 		}
 		
+		public JLabel getEntryGateStatusLabel()
+		{
+			return entryGateStatus;
+		}
 		public Garage getGarage()
 		{
 			return garage;
 		}
+		
+		public JFrame getEntryFrame()
+		{
+			return entryFrame;
+		}
 		public void run()
 		
 		{
+			
 		JFrame.setDefaultLookAndFeelDecorated(true);
 		entryFrame = new JFrame("Enter Garage");
 		entryFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
@@ -172,12 +183,29 @@ public class EntryView {
 		    assignedLot = new JLabel("Assigned Lot");
 		    timeOfEntry = new JLabel("Time of Entry");
 		    parkingRate= new JLabel("Rate of Parking");
+		    entryGateStatus= new JLabel("Status of entry gate");
 		    
 		    ticketNum.setText("Ticket Num :    " + ticket.getTicketReferenceNumber());
 		    assignedLot.setText("Assigned Parking Lot :    " + ticket.getAssignedParkingLot());
 		    timeOfEntry.setText("Time of Entry is :    " + ticket.getTimeOfEntry().getTime());
 		    parkingRate.setText("Parking Rate Per Hour is    " + ticket.getParkingRate() + "$");
 		    
+		    addButton = new JButton("Proceed");
+		    addButton.addActionListener(new EntryActionListener2(this));
+		    
+		    
+		    mainPanel.add(ticketNum);
+		    mainPanel.add(assignedLot);
+		    mainPanel.add(timeOfEntry);
+		    mainPanel.add(parkingRate);
+		    mainPanel.add(entryGateStatus);
+		    mainPanel.add(addButton);
+		    
+		    entryFrame.setContentPane(mainPanel);
+		    entryFrame.pack();
+			entryFrame.setVisible(true);
+		    
+			
 		    
 		    
 		    
