@@ -2,6 +2,7 @@ package cs414.a5.nithya.client;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -46,6 +47,18 @@ public class ExitActionListener5 implements ActionListener {
 		catch (CustomException c)
 		{
 			ExceptionView ev= new ExceptionView(c.getMessage());
+			 try {
+					if(exitView.getGarage().getExitKiosk().getName().equals("ex1"))
+						  ParkingGarageExit1.createAndShowGUI();
+					else if (exitView.getGarage().getExitKiosk().getName().equals("ex2"))
+						ParkingGarageExit2.createAndShowGUI();
+				} catch (RemoteException er) {
+					// TODO Auto-generated catch block
+					ExceptionView ev1= new ExceptionView(er.getMessage());
+				} catch (NotBoundException enb) {
+					// TODO Auto-generated catch block
+					ExceptionView ev2= new ExceptionView(enb.getMessage());
+				}
 		}
 		
 	}

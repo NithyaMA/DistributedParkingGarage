@@ -30,8 +30,8 @@ private  EntryView entryView;
 		  try {
 			if(entryView.getGarage().getEntryKiosk().getName().equals("en1"))
 				  ParkingGarageEntry1.createAndShowGUI();
-			/*else if (entryView.getGarage().getEntryKiosk().getName().equals("en2"))
-				ParkingGarageEntry2.createAndShowGUI();*/
+			else if (entryView.getGarage().getEntryKiosk().getName().equals("en2"))
+				ParkingGarageEntry2.createAndShowGUI();
 		} catch (RemoteException e1) {
 			// TODO Auto-generated catch block
 			ExceptionView ev= new ExceptionView(e1.getMessage());

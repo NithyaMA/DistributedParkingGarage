@@ -129,14 +129,13 @@ public class ParkingGarageExit1 implements ActionListener {
           
            else if (garageChoices.getSelectedItem().equals("Stuck in garage"))
            {
-        	   HelpView helpView = new HelpView();
+        	   HelpView helpView = new HelpView(garage);
         	   helpView.run();
         	   garageFrame.dispose();
            }
            else if (garageChoices.getSelectedItem().equals("Exit from menu"))
            {
-        	  TerminationView terminationView= new TerminationView();
-        	  terminationView.run();
+        	  
         	  garageFrame.dispose();
            }
     }

@@ -2,6 +2,7 @@ package cs414.a5.nithya.client;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
 import cs414.a5.nithya.common.CustomException;
@@ -38,10 +39,23 @@ public class EntryActionListener implements ActionListener{
 				catch(InterruptedException ie)
 				{
 					ExceptionView ev= new ExceptionView(ie.getMessage());
+					
 				}
 		} catch (CustomException e) {
 			// TODO Auto-generated catch block
 			ExceptionView ev= new ExceptionView(e.getMessage());
+			 try {
+					if(entryView.getGarage().getEntryKiosk().getName().equals("en1"))
+						  ParkingGarageEntry1.createAndShowGUI();
+					else if (entryView.getGarage().getEntryKiosk().getName().equals("en2"))
+						ParkingGarageEntry2.createAndShowGUI();
+				} catch (RemoteException e1) {
+					// TODO Auto-generated catch block
+					ExceptionView e12= new ExceptionView(e1.getMessage());
+				} catch (NotBoundException e1) {
+					// TODO Auto-generated catch block
+					ExceptionView e11= new ExceptionView(e1.getMessage());
+				}
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			ExceptionView ev= new ExceptionView(e.getMessage());

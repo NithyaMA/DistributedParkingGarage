@@ -383,7 +383,7 @@ public class ExitView {
 	{
 		
 		JFrame.setDefaultLookAndFeelDecorated(true);
-		exitFrame = new JFrame("Enter Garage");
+		exitFrame = new JFrame("Exit Garage");
 		exitFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
 		
 		mainPanel= new JPanel();

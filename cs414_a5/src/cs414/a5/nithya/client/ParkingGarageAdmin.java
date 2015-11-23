@@ -129,8 +129,7 @@ public class ParkingGarageAdmin implements ActionListener {
              
            else if (garageChoices.getSelectedItem().equals("Exit from menu"))
            {
-        	  TerminationView terminationView= new TerminationView();
-        	  terminationView.run();
+        	  
         	  garageFrame.dispose();
            }
     }

@@ -14,7 +14,7 @@ public class ExceptionView {
 		JFrame.setDefaultLookAndFeelDecorated(true);
 		garageErrorFrame = new JFrame("Error Frame");
 		
-		garageErrorFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
+		//garageErrorFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
 		  JPanel mainPanel, displayPanel;
 		  mainPanel = new JPanel();
 		  JLabel greetingLabel= null;

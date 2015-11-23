@@ -24,7 +24,7 @@ public class ParkingGarageEntry1 implements ActionListener {
 	JPanel mainPanel, selectPanel, displayPanel;
     JComboBox garageChoices = null;
     JLabel greetingLabel= null;
-    JLabel statusLabel= null;
+    
     static JFrame garageFrame= null;
     
 	 
@@ -80,15 +80,7 @@ public class ParkingGarageEntry1 implements ActionListener {
 		  greetingLabel.setText("Welcome to " + garage.getName() +" Parking Garage");
 		  
 		  
-		 statusLabel = new JLabel();
-		 statusLabel.setBorder(BorderFactory.createCompoundBorder(
-		            BorderFactory.createLoweredBevelBorder(),
-		            BorderFactory.createEmptyBorder(5,5,5,5)));
-
-		 statusLabel.setBorder(BorderFactory.createCompoundBorder(
-		            BorderFactory.createEmptyBorder(0,0,10,0),
-		 statusLabel.getBorder()));
-		 statusLabel.setText("Garage status : " + garage.getGarageStatus());
+		
 		  
 		  if (garage.getGarageStatus().equals("available"))
 		  { 
@@ -107,7 +99,7 @@ public class ParkingGarageEntry1 implements ActionListener {
 		  garageChoices.setSelectedIndex(0);
 		  garageChoices.addActionListener(this);
 		  displayPanel.add(greetingLabel);
-		  displayPanel.add(statusLabel);
+		  
 		  selectPanel.add(garageChoices);
 		
 	  }
@@ -138,8 +130,7 @@ public class ParkingGarageEntry1 implements ActionListener {
          
            else if (garageChoices.getSelectedItem().equals("Exit from menu"))
            {
-        	  TerminationView terminationView= new TerminationView();
-        	  terminationView.run();
+        	 
         	  garageFrame.dispose();
            }
     }
