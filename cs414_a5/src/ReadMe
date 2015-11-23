@@ -21,5 +21,3 @@ Read Me File
    Methods in improper classes were changed to the proper ones(Expert pattern), Avoided data clumps by introducing classes.
    I have used Facade pattern in my program.
 
-Extra:
-I have also retained the text based client (cs414.a5.nithya.client.GarageClient.java) in my application.   
