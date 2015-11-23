@@ -1,0 +1,25 @@
+Read Me File
+-----------------------------------------------------------------------------------------------------------------------
+
+1. No external .jar dependancies. Did not use a database. Used program memory.Used swing user interface.For 
+   logging, I typed exactly as per the github repository. For reference I have provided the github url.
+
+2. I have included the starting of rmi registry in the program itself. So no need to start it seperately
+   from command line. Start the cs414.a5.nithya.server.GarageServer.java. Then start the clients 
+   cs414.a5.nithya.client.ParkingGarageStatusClient for knowing garage status
+   cs414.a5.nithya.client.ParkingGarageEntry1 for entry 
+   cs414.a5.nithya.client.ParkingGarageEntry2 for entry
+   cs414.a5.nithya.client.ParkingGarageExit1 for exit
+   cs414.a5.nithya.client.ParkingGarageExit2 for exit
+   cs414.a5.nithya.client.ParkingGarageAdmin for admin functions
+   
+3. No user names and passwords are necessary
+
+4. I have implemented the program as per the requirements of the assignment.
+
+5. I have used refactorings like convert long methods to shorter methods, introduced methods to avoid comments, 
+   Methods in improper classes were changed to the proper ones(Expert pattern), Avoided data clumps by introducing classes.
+   I have used Facade pattern in my program.
+
+Extra:
+I have also retained the text based client (cs414.a5.nithya.client.GarageClient.java) in my application.   

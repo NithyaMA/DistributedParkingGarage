@@ -1,0 +1,45 @@
+Commit Log
+---------------------------------
+Nov 13, 2015
+Started A5
+Implemented new features
+
+Nov 14, 2015
+Refactored Code
+Refactered Code Further
+
+Nov 18, 2015
+Working on common package
+Started working on server package
+Completed common
+Working on servers further
+
+Nov 19, 2015
+Working on server
+Finished common and server
+Made changes
+
+Nov 20, 2015
+Tested the features with text based client
+Made modifications
+
+Nov 21, 2015
+Working on client
+Client modifications
+Seperated entry, exit and admin views
+Completed entry scenario
+
+Nov 22, 2015
+Working on Exit
+Working on Admin view
+Working on report generation client part
+Completed admin client
+Completed application. working fine
+Completed tests
+--------------------------------------------------------------------------------------------------------------
+
+Reference: github: 
+https://github.com/NithyaMA/ParkingGarageSystem/commits/master
+https://github.com/NithyaMA/DistributedParkingGarage/commits/master
+
+----------------------------------------------------------------------------------------------------------------
